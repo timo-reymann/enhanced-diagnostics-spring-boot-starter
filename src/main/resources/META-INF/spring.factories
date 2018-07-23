@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.github.timoreyman.enhanced_diagnostics_springboot_starter.EnhancedDiagnosticsAutoConfiguration
