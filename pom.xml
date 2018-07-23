@@ -6,7 +6,7 @@
     <url>https://github.com/timo-reymann/enhanced-diagnostics-spring-boot-starter</url>
     <groupId>com.github.timo-reymann</groupId>
     <artifactId>enhanced-diagnostics-spring-boot-starter</artifactId>
-    <version>0.0.4</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>enhanced-diagnostics-spring-boot-starter</name>
@@ -85,6 +85,11 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>1.57</version>
         </dependency>
     </dependencies>
 

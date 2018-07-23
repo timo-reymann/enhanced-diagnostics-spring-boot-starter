@@ -13,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
 @Slf4j
 public class KeyHolder {
     @Getter
-    private KeyPair keyPair = CryptoUtility.generateKey(4096);
+    private KeyPair keyPair;
 
     public KeyHolder() throws NoSuchAlgorithmException {
     }

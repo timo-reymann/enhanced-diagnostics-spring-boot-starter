@@ -4,9 +4,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.timo_reymann.spring_boot_enhanced_diagnostics_starter.dto.EncryptedReport;
 import com.github.timoreyman.enhanced_diagnostics_springboot_starter.security.KeyHolder;
 import com.github.timoreyman.enhanced_diagnostics_springboot_starter.transfer.PublicKey;
+import org.bouncycastle.util.io.pem.PemObject;
+import org.bouncycastle.util.io.pem.PemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
@@ -32,12 +36,11 @@ public class ReportRestController {
     }
 
     @GetMapping("/publicKey")
-    public PublicKey getPublicKey() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("-----BEGIN PRIVATE KEY-----\n");
-        byte[] encoded = keyHolder.getKeyPair().getPublic().getEncoded();
-        stringBuilder.append(new String(Base64.getEncoder().encode(encoded)));
-        stringBuilder.append("\n-----END PRIVATE KEY-----\n");
-        return new PublicKey(stringBuilder.toString());
+    public PublicKey getPublicKey() throws IOException {
+        StringWriter writer = new StringWriter();
+        PemWriter pemWriter = new PemWriter(writer);
+        pemWriter.writeObject(new PemObject("CERTIFICATE",keyHolder.getKeyPair().getPublic().getEncoded()));
+        pemWriter.close();
+        return new PublicKey(writer.getBuffer().toString());
     }
 }
