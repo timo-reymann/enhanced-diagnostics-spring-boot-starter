@@ -6,7 +6,7 @@
     <url>https://github.com/timo-reymann/enhanced-diagnostics-spring-boot-starter</url>
     <groupId>com.github.timo-reymann</groupId>
     <artifactId>enhanced-diagnostics-spring-boot-starter</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.4</version>
     <packaging>jar</packaging>
 
     <name>enhanced-diagnostics-spring-boot-starter</name>

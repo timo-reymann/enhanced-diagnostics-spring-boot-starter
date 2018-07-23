@@ -13,7 +13,10 @@ import java.security.NoSuchAlgorithmException;
 @Slf4j
 public class KeyHolder {
     @Getter
-    private KeyPair keyPair;
+    private KeyPair keyPair = CryptoUtility.generateKey(4096);
+
+    public KeyHolder() throws NoSuchAlgorithmException {
+    }
 
     @Scheduled(fixedRate = 1_000 * 60 * 60 * 12)
     public void renew() throws NoSuchAlgorithmException {

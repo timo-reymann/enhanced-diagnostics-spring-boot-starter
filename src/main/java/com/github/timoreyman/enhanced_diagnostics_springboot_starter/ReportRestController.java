@@ -7,12 +7,12 @@ import com.github.timoreyman.enhanced_diagnostics_springboot_starter.transfer.Pu
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 @RestController
-@RequestMapping("/${enhanced-diagnostics.routePrefix}")
+@RequestMapping("/${enhanced-diagnostics.route-prefix:/report}")
 public class ReportRestController {
     private final ReportProcessorBean reportProcessorBean;
     private final ObjectMapper objectMapper;
@@ -33,6 +33,11 @@ public class ReportRestController {
 
     @GetMapping("/publicKey")
     public PublicKey getPublicKey() {
-        return new PublicKey(new String(keyHolder.getKeyPair().getPublic().getEncoded(), UTF_8));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("-----BEGIN PRIVATE KEY-----\n");
+        byte[] encoded = keyHolder.getKeyPair().getPublic().getEncoded();
+        stringBuilder.append(new String(Base64.getEncoder().encode(encoded)));
+        stringBuilder.append("\n-----END PRIVATE KEY-----\n");
+        return new PublicKey(stringBuilder.toString());
     }
 }
